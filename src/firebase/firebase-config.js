@@ -5,13 +5,13 @@ import 'firebase/firestore';
 import 'firebase/auth';
 
 export const firebaseConfig = {
-    apiKey: "AIzaSyCcFl2vnYnU3YyQWGQLj5MAeQWTXYc1uqI",
-    authDomain: "react-app-cursos-ba949.firebaseapp.com",
-    projectId: "react-app-cursos-ba949",
-    storageBucket: "react-app-cursos-ba949.appspot.com",
-    messagingSenderId: "712927062369",
-    appId: "1:712927062369:web:f95bc4946312a495207d20",
-    measurementId: "G-21J6G0R0Q3"
+    apiKey: process.env.REACT_APP_APIKEY,
+    authDomain: process.env.REACT_APP_AUTHDOMAIN,
+    projectId: process.env.REACT_APP_PROJECTID,
+    storageBucket: process.env.REACT_APP_STORAGEBUCKET,
+    messagingSenderId: process.env.REACT_APP_MESSAGINGSENDERID,
+    appId: process.env.REACT_APP_APPID,
+    measurementId: process.env.REACT_APP_MEASUREMENTID
 };
 
 initializeApp(firebaseConfig);

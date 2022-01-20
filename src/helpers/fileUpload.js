@@ -18,6 +18,7 @@ const fileUpload = async ( file ) => {
         }
     } catch (error) {
         console.log(error);
+        return null;
     }
 
     // return url;

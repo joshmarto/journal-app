@@ -15,10 +15,14 @@ export const startNewNote = () => {
             date: new Date().getTime(),
         };
 
-        const doc = await addDoc( collection(db, `${uid}/journal/notes`), newNote );
-        // console.log( doc );
-        dispatch( activeNote( doc.id, newNote ) );
-        dispatch( addNewNote( doc.id, newNote) );
+        try {
+            const doc = await addDoc( collection(db, `${uid}/journal/notes`), newNote );
+            // console.log( doc );
+            dispatch( activeNote( doc.id, newNote ) );
+            dispatch( addNewNote( doc.id, newNote) );
+        } catch (error) {
+            console.log( error );
+        }
     }
 }
 
@@ -82,8 +86,14 @@ export const startUploading = ( file ) => {
         });
 
         const { active: note } = getState().notes;
-        const fileUrl = await fileUpload( file );
-        
+        let fileUrl = '';
+        if ( process.env.NODE_ENV === 'development' ){
+            fileUrl = await fileUpload( file );
+        } else if ( process.env.NODE_ENV === 'test' ) {
+            fileUrl = await fileUpload.fileUpload( file );
+        } else {
+            fileUrl = await fileUpload( file );
+        }
         note.url = fileUrl;
         
         dispatch( startSaveNote( note ) );

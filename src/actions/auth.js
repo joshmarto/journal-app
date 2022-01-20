@@ -9,7 +9,7 @@ export const startLoginEmailPassword = ( email, password ) => {
     return (dispatch) => {
         const auth = getAuth();
         dispatch( startLoading() );
-        signInWithEmailAndPassword( auth, email, password )
+        return signInWithEmailAndPassword( auth, email, password )
             .then( ({user}) => {
                 dispatch( login( user.uid, user.displayName ));
                 dispatch( finishLoading() );
@@ -19,11 +19,11 @@ export const startLoginEmailPassword = ( email, password ) => {
                 dispatch( finishLoading() );
                 Swal.fire('Error', e.message, 'error');
             });
-        /* dispatch( startLoading() );
-        setTimeout(() => {
-            dispatch( login(123, 'Pedro') );
-            dispatch( finishLoading() );
-        }, 3500); */
+        /*  dispatch( startLoading() );
+            setTimeout(() => {
+                dispatch( login(123, 'Pedro') );
+                dispatch( finishLoading() );
+            }, 3500); */
     }
 }
 
